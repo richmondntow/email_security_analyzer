@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  clamav:
+    image: mkodockx/docker-clamav:alpine
+    container_name: clamav
+    ports:
+      - "3310:3310"
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - clamav
+    environment:
+      - CLAMD_SOCKET=
